@@ -8,7 +8,8 @@ function [S,V]=dea(A,B,specent,lambda,nocomp)
 %          desired eigenvector entries along with any arbitrary values denoted
 %          by the variable NaN). If complex entries are desired, the number 
 %          nocomp defines the number of pairs of complex conjugate poles and
-%          corresponding eigenvector entries. The vector lambda defines the      %          desired sliding mode poles; the first 2i-1 (i=1, nocomp) entries 
+%          corresponding eigenvector entries. The vector lambda defines the      
+%          desired sliding mode poles; the first 2i-1 (i=1, nocomp) entries 
 %          contain the real parts of the complex conjugate poles and the 
 %          first 2i (i=1,nocomp) contain the imaginary parts. 
 %
@@ -66,14 +67,14 @@ end;
 specpos=~isnan(specent);
 
 % check if the specified matrix is the correct size
-if spn~=nn | spm~=(nn-mm)
+if spn~=nn || spm~=(nn-mm)
    error(' The matrix for eigenvector entries is not consistent');end 
 
 
 % Check if each column of the specified matrix as at least one
 % specified entry, since by definition eigenvectors are non-zero                                                        
 for i=1:nn-mm
-    if norm(specpos(:,i))<100*nn*eps
+    if norm(double(specpos(:,i)))<100*nn*eps
        error('Specified entries need to be made in each column of the an eigenvector');end
 end  
 

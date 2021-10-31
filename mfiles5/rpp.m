@@ -41,7 +41,7 @@ end
 %----------------------------------------------------------------------------%
 % Obtain regular form transformation. 
 %----------------------------------------------------------------------------%
-[A11,A12,B2,Tr]=regfor(A,B);
+[A11,A12,A21,A22,B2,Tr]=regfor(A,B);
 
 %----------------------------------------------------------------------------%
 % Check if the correct number of poles has been specified,
@@ -66,7 +66,9 @@ else
   A12tilde=A12tilde';
   A12tilde=A12tilde(:,1:rnk);
   Mtilde=place(A11,A12tilde,p);
-  M=Q*[Mtilde;zeros(mm-rnk,nn)];
+  %M=Q*[Mtilde;zeros(mm-rnk,nn)];
+  %% changed by W. Schwamm 15.09.2016
+  M=Q*[Mtilde;zeros(mm-rnk,nn-mm)];
 end 
 
 % --------------------------------------------------------------------------%

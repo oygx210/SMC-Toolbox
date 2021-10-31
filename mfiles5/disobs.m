@@ -1,6 +1,6 @@
-function [Gl,Gn,P2]=disobs(A,D,C)
+function [Gl,Gn,P2]=disobs(A,D,C,psm,per)
 
-% [Gl,Gn,P2]=disobs(A,D,C) 
+% [Gl,Gn,P2]=disobs(A,D,C,psm,per) 
 %
 %         The function returns the linear gain Gl and non-linear gain Gn 
 %         along with the Lyapunov matrix P2 which constitutes a discontinuous 
@@ -13,6 +13,9 @@ function [Gl,Gn,P2]=disobs(A,D,C)
 %         the desired stable poles of the sliding motion.  
 %         In addition the user is prompted for p stable real poles which form
 %         part of the state estimation error dynamics.
+
+%         psm - desired pole(s) for sliding motion
+%         per - desired pole(s) for estimation error
 
 
 %         Chris Edwards, Robert Cortez & Sarah Spurgeon
@@ -31,7 +34,7 @@ function [Gl,Gn,P2]=disobs(A,D,C)
 % condition that C*D is full rank.
 %-----------------------------------------------------------------------------%
 msg=abcchk(A,D,C);
-if ~isempty(msg);
+if ~isempty(msg)
   error(msg);
 end
 
@@ -45,7 +48,7 @@ end
 % where the matrix Acal will now have have a stable top left sub-block
 %----------------------------------------------------------------------------%
 
-[Ac,Dc,Cc,Tc]=obsfor(A,D,C);
+[Ac,Dc,Cc,Tc]=obsfor(A,D,C,psm);
 if isempty(Tc)
    fprintf('No sliding mode observer exists\n')
    P=[];Gl=[];Gn=[];
@@ -68,12 +71,24 @@ D2=Dc(nn-pp+1:nn,:);
 a12=Ac(1:nn-pp,nn-pp+1:nn);
 a22=Ac(nn-pp+1:nn,nn-pp+1:nn);
 
-pmsg=['Enter '  num2str(pp) ' output estimation error pole(s) '];
-msg=[' '];
-while ~isempty(msg);
-  p=input(pmsg);
-  p=p(:);
-  msg=polechk(p,pp,1);
+if nargin==3
+    pmsg=['Enter '  num2str(pp) ' output estimation error pole(s) '];
+    msg=[' '];
+    while ~isempty(msg)
+        p=input(pmsg);
+        p=p(:);
+        msg=polechk(p,pp,1);
+    end
+    a
+else if nargin==5
+        msg=polechk(per,pp,1);
+        if ~isempty(msg)
+            error(msg);
+            return;
+        else
+            p=per(:);
+        end
+    end
 end
 a22s=diag(p,0);
 

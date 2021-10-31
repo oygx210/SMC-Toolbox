@@ -1,4 +1,4 @@
-function [G,F]=wzobs(A,B,C)
+function [G,F]=wzobs(A,B,C,psm,per)
 
 % [G,F]=wzobs(A,B,C) 
 %
@@ -46,7 +46,7 @@ end
 
 [nn,mm]=size(B);
 [pp,nn]=size(C);
-[Ac,Bc,Cc,Tc]=obsfor(A,B,C);
+[Ac,Bc,Cc,Tc]=obsfor(A,B,C,psm);
 if isempty(Tc)
    fprintf('No sliding mode observer exists\n')
    G=[];F=[];
@@ -60,12 +60,24 @@ B2=Bc(nn-pp+1:nn,:);
 a12=Ac(1:nn-pp,nn-pp+1:nn);
 a22=Ac(nn-pp+1:nn,nn-pp+1:nn);
 
-pmsg=['Enter ',num2str(pp),' desired output estimation error pole(s) '];
-msg=[' '];
-while ~isempty(msg)
-  p=input(pmsg);
-  p=p(:);
-  msg=polechk(p,pp,1);
+if nargin==3
+    pmsg=['Enter '  num2str(pp) ' output estimation error pole(s) '];
+    msg=[' '];
+    while ~isempty(msg);
+        p=input(pmsg);
+        p=p(:);
+        msg=polechk(p,pp,1);
+    end
+    
+else if nargin==5
+        msg=polechk(per,pp,1);
+        if ~isempty(msg)
+            error(msg);
+            return;
+        else
+            p=per(:);
+        end
+    end
 end
 a22s=diag(p,0);
 

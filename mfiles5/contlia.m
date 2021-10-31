@@ -1,4 +1,4 @@
-function [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr)
+function [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr_in)
 %
 % [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr)
 %
@@ -37,7 +37,7 @@ function [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr)
 % Check the size of Phi and whether it is a stable design matrix 
 %----------------------------------------------------------------------------%
 [mx,my]=size(Phi);
-if mx~=mm | my~=mm
+if mx~=mm || my~=mm
    error('The size of the design matrix Phi is inconsistent');end
  
 if any(real(eig(Phi))>=-eps)
@@ -47,9 +47,9 @@ if any(real(eig(Phi))>=-eps)
 %----------------------------------------------------------------------------%
 % Check the size of Sr  
 %----------------------------------------------------------------------------%
-if nargin >5
-  [mx,my]=size(Sr);
-  if (mx~=mm | my~=pp)
+if nargin>5
+  [mx,my]=size(Sr_in);
+  if (mx~=mm || my~=pp)
      error('The size of the design matrix Sr is inconsistent');
   end
 end
@@ -58,7 +58,7 @@ end
 % Augment the statespace with integral action states
 %----------------------------------------------------------------------------%
 AT=[zeros(pp,pp) -C; zeros(nn,pp) A];
-[A11,A12,B2,Tr]=regfor(A,B);
+[A11,A12,A21,A22,B2,Tr]=regfor(A,B);
 BT=[zeros(pp,mm); B];
 
 %----------------------------------------------------------------------------%
@@ -82,7 +82,10 @@ A11s=A11a-A12a*M;
 %----------------------------------------------------------------------------%
 Br=[eye(pp); zeros(nn-mm,pp)];
 if nargin==5
-  Sr=-Snew(:,nn+pp-mm+1:nn+pp)*inv(Br'*inv(A11s)*A12a)*Br'*inv(A11s)*Br;
+    Sr=-Snew(:,nn+pp-mm+1:nn+pp)*inv(Br'*inv(A11s)*A12a)*Br'*inv(A11s)*Br;
+else if nargin>5
+        Sr=Sr_in;
+end
 end
 
 %----------------------------------------------------------------------------%

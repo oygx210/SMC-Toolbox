@@ -1,4 +1,4 @@
-function  [Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C)
+function  [Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C,ped,psm,prsd)
 
 % [Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C) 
 %
@@ -19,6 +19,9 @@ function  [Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C)
 %      component. The orthogonal matrix T is obtained from the canonical form
 %      for output feedback design and is used to scale the outputs.
 
+%      ped - desired pole(s) for error dynamics (Lo)
+%      psm - desired pole(s) for sliding motion
+%      prsd - desired pole(s) for range space dynamics
 
 %      Chris Edwards, Robert Cortez & Sarah Spurgeon
 %      Control Systems Research
@@ -63,23 +66,43 @@ end
 % Prompt the user for vectors p1, p2, and p3 and then check the sizes 
 %----------------------------------------------------------------------------%
 
+if nargin==3
+    t1=['Enter ' num2str(nn-pp-r) ' pole(s) for the error dynamics '];
+    msg=' ';
+    while ~isempty(msg)
+        p1=input(t1); p1=p1(:);
+        msg=polechk(p1,nn-pp-r);
+        disp(msg)
+    end
 
-t1=['Enter ' num2str(nn-pp-r) ' pole(s) for the error dynamics '];
-msg=' ';
-while ~isempty(msg)
-   p1=input(t1); p1=p1(:);
-   msg=polechk(p1,nn-pp-r);
-   disp(msg)
+    t2=['Enter ' num2str(nn-mm-r) ' pole(s) for sliding motion '];
+    msg=' ';
+    while ~isempty(msg)
+        p2=input(t2); p2=p2(:);
+        msg=polechk(p2,nn-mm-r);
+        disp(msg)
+    end
+
+else if nargin==6
+        % error dynamics
+        msg=polechk(ped,nn-pp-r);
+        if ~isempty(msg)
+            error(msg);
+            return;
+        else
+            p1=ped(:);
+        end
+
+        % sliding motion
+        msg=polechk(psm,nn-mm-r);
+        if ~isempty(msg)
+            error(msg);
+            return;
+        else
+            p2=psm(:);
+        end
 end
-
-t2=['Enter ' num2str(nn-mm-r) ' pole(s) for sliding motion '];
-msg=' ';
-while ~isempty(msg)
-   p2=input(t2); p2=p2(:);
-   msg=polechk(p2,nn-mm-r);
-   disp(msg)
 end
-
 
 %----------------------------------------------------------------------------%
 % If the poles chosen are complex, check if they are in complex conjugate pairs
@@ -87,12 +110,25 @@ end
 p1=cplxpair(p1); 
 p2=cplxpair(p2);
 
-t3=['Enter ' num2str(mm) ' pole(s) for the range space dynamics '];
-msg=' ';
-while ~isempty(msg)
-   p3=input(t3); p3=p3(:);
-   msg=polechk(p3,mm,1);
-   disp(msg)
+if nargin==3
+    t3=['Enter ' num2str(mm) ' pole(s) for the range space dynamics '];
+    msg=' ';
+    while ~isempty(msg)
+        p3=input(t3); p3=p3(:);
+        msg=polechk(p3,mm,1);
+        disp(msg)
+    end
+else if nargin==6
+        % range space dynamics
+        msg=polechk(prsd,mm,1);
+        if ~isempty(msg)
+            error(msg);
+            return;
+        else
+            p3=prsd(:);
+        end
+end
+
 end
 
 %----------------------------------------------------------------------------%
@@ -138,7 +174,6 @@ Dhat=[A121m-A12o*Lo A121; D1 D2]*T';
 %----------------------------------------------------------------------------%
 % Calculate the hyperplane
 %----------------------------------------------------------------------------%
-
 
 S2=eye(mm);
 S=S2*[zeros(mm,r) Kc K eye(mm)];

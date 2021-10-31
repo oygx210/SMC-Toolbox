@@ -66,7 +66,7 @@ if any(eig(Q) <= eps*nnx) | (norm(Q'-Q,1)/nnx > eps)
 % Obtain the regular form transformation using the function 
 %----------------------------------------------------------------------------%
 
-[A11,A12,B2,Tr]=regfor(A,B);
+[A11,A12,A21,A22,B2,Tr]=regfor(A,B);
 			
 %----------------------------------------------------------------------------%
 % Transform weighting matrix to regular form coordinate system

@@ -1,4 +1,4 @@
-function [Ac,Dc,Cc,Tc]=obsfor(A,D,C)
+function [Ac,Dc,Cc,Tc]=obsfor(A,D,C,psm)
 
 % [Ac,Dc,Cc,Tc]=obsfor(A,D,C) 
 %
@@ -46,25 +46,37 @@ if isempty(Tout)
 end
 
 if nn-pp-r>0
-   pmsg=['Enter '  num2str(nn-pp-r) ' desired stable sliding mode pole(s) '];
-   msg=' ';
-   while ~isempty(msg);
-      p1=input(pmsg);
-      p1=p1(:);
-      msg=polechk(p1,nn-pp-r);
-   end
-   cplxpair(p1);
-   A22o=Af(r+1:nn-pp,r+1:nn-pp);
-   A21o=Af(nn-pp+1:nn-qq,r+1:nn-pp);
-   Ltemp=vplace(A22o',A21o',p1)';
-   if r>0
-     L=-[zeros(r,pp-qq); Ltemp];
-   else
-     L=-Ltemp;
-   end
+    if nargin==3
+        pmsg=['Enter '  num2str(nn-pp-r) ' desired stable sliding mode pole(s) '];
+        msg=' ';
+        while ~isempty(msg);
+            p1=input(pmsg);
+            p1=p1(:);
+            msg=polechk(p1,nn-pp-r);
+        end
+    else if nargin==4
+            msg=polechk(psm,nn-pp-r);
+            if ~isempty(msg)
+                error(msg);
+                return;
+            else
+                p1=psm(:);
+            end
+            
+        end
+    end
+    cplxpair(p1);
+    A22o=Af(r+1:nn-pp,r+1:nn-pp);
+    A21o=Af(nn-pp+1:nn-qq,r+1:nn-pp);
+    Ltemp=vplace(A22o',A21o',p1)';
+    if r>0
+        L=-[zeros(r,pp-qq); Ltemp];
+    else
+        L=-Ltemp;
+    end
 else
-   L=zeros(nn-pp,pp-qq);
-end 
+    L=zeros(nn-pp,pp-qq);
+end
 Lbar=[L zeros(nn-pp,qq)];
 
 %---------------------------------------------------------------------------%

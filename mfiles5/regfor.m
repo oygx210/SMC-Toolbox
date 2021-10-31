@@ -1,6 +1,6 @@
-function [A11,A12,B2,Tr]=regfor(A,B)
+function [A11,A12,A21,A22,B2,Tr]=regfor(A,B)
 
-% [A11,A12,B2,Tr]=regfor(A,B) 
+% [A11,A12,A21,A22,B2,Tr]=regfor(A,B) 
 %        Returns the sub-matrices and the orthogonal transformation matrix that 
 %        brings about the canonical form. The pair A,B are partitioned in the 
 %        form
@@ -45,4 +45,6 @@ Breg=Tr*B;
 %--------------------------------------------------------------------------%
 A11 = Areg(1:nn-mm,1:nn-mm);
 A12 = Areg(1:nn-mm,nn-mm+1:nn);
+A21 = Areg(nn-mm+1:nn,1:nn-mm);
+A22 = Areg(nn-mm+1:nn,nn-mm+1:nn);
 B2 = Breg(nn-mm+1:nn,1:mm);
