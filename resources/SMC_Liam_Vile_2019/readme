@@ -1,0 +1,29 @@
+FILE NAME   LAST UPDATE    DESCRIPTION
+
+abcchk.m      20/8/98    Consistency checker
+comrobs.m     20/8/98    Compensator design
+contl.m       20/8/98    Builds the state feedback control law
+contlia.m     20/8/98    Builds the control law in the case of integral action
+cplxchk.m      7/2/99    Checks for complex conjugate pairs
+dea.m         20/8/98    Hyperplane design by direct eigenstructure assignment
+disobs.m       7/2/99    Sliding mode observer design
+eigbuil.m     20/8/98    Data entry program for eigenstructure assignment
+intac.m       20/8/98    Augments the system with integral action states
+lqcf.m        20/8/98    Hyperplane design by quadratic cost minimization
+obsfor.m       7/2/99    Transforms the system to observer canonical form
+outfor.m       7/2/99    Transforms the system to output feedback canonical form
+polechk.m      7/2/99    Checks poles for stability
+posdef.m      20/8/98    Checks for positive definiteness
+regfor.m      20/8/98    Transforms the system to so-called regular form
+rpp.m         20/8/98    Hyperplane design by robust pole placement
+sizechk.m     20/8/98    Checks for size compatibility
+sqobs.m       20/8/98    Designs a sliding mode observer for square systems
+stable.m      20/8/98    Checks for stability
+vplace.m      20/8/98    Robust pole placement by state feedback
+wzobs.m       20/8/98    Designs a Walcott & Zak observer
+
+
+Further details are available in
+
+C. Edwards & S.K. Spurgeon, `A Sliding Mode Control Matlab Toolbox', Leicester
+University Internal Report.  Rep-No 98-9, 1998 
