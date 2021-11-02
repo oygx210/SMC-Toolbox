@@ -14,6 +14,13 @@ Phi=-5;
 [L,P,Lam]=contl(A,B,S,Phi);
 
 %%
+mdl_name='streg_mdl';
+if ~bdIsLoaded(mdl_name)
+    open('streg_mdl.slx');
+end
+sim(mdl_name);
+
+%%
 subplot(3,1,1)
 plot(t.Data,u.Data);
 grid on;
