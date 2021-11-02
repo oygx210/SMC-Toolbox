@@ -2,7 +2,6 @@ clear all;
 
 load vertint.mat;
 
-
 %% Kap. 4.5.1
 lambda = [-5.6 4.2 -1];
 nocomp=1;

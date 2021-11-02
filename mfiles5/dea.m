@@ -58,8 +58,8 @@ if length(lambda)~=(nn-mm)
 for i=1:nn-mm
     if isreal(lambda(i))~=1
        error(' The entries should not have imaginary parts.');
-    end;
-end;
+    end
+end
 
 %----------------------------------------------------------------------------%
 % Create the matrix that indicates whether values are arbitrary or specified
@@ -102,13 +102,13 @@ for i=1:nocomp
    despos=find(specpos(:,2*i-1));
    numspecr=length(despos);
    n1=[]; desent=[];
-   for j=1:numspecr,
+   for j=1:numspecr
       n1(j,:)=kgamma(despos(j),:);
       desent(j)=specent(despos(j),2*i-1);
    end
    despos=find(specpos(:,2*i));
    numspecc=length(despos);
-   for j=1:numspecc,
+   for j=1:numspecc
       n1(j+numspecr,:)=kgamma(despos(j)+nn,:);
       desent(j+numspecr)=specent(despos(j),2*i);
    end
@@ -143,15 +143,16 @@ for i=2*nocomp+1:(nn-mm)
    for j=1:numspec
     n2(j,:)=nlambda(despos(j),:);
     desent2(j)=specent(despos(j),i);      
-   end;
+   end
       
   % Find solution for delta
    delta=n2\desent2';
    if norm(delta) < 100*mm*eps
-      warndlg(' The specified entries have produced a zero eigenvector');end
+      warndlg(' The specified entries have produced a zero eigenvector');
+   end
    V(:,i)=nlambda*delta;
 
-end;
+end
 
 % Use a singular value decomposition to determine the switching 
 % function matrix from the selected eigenvectors

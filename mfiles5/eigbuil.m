@@ -17,7 +17,7 @@ function specent=eigbuil(n,m,nocomp)
 %       Email: ce@sun.engg.le.ac.uk
 %
 if nargin==2
-  nocomp=0
+  nocomp=0;
 end
 
 if n<=m
@@ -52,7 +52,7 @@ for jj=1:n-m
   while ii>0
     ii=input('Enter position ');
     ii=fix(ii);
-    if ii>0 & ii<=n
+    if ii>0 && ii<=n
       specent(ii,jj)=input('Enter associated value ');
     end
   end

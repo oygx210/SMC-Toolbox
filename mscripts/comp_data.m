@@ -37,13 +37,20 @@ plot(t.Data,x.Data);
 grid on;
 legend({'x1','x2','x3','x4'});
 
+xc=xhat.Data(:,2);
+x11=x.Data(:,2);
+x12=x.Data(:,3);
+ec=xc-x11-Lo*x12;
 subplot(2,2,2)
-plot(t.Data,ec.Data);
+plot(t.Data,ec);
 grid on;
 legend({'ec'});
 
+xr=x.Data(:,1);
+zr=xhat.Data(:,1);
+er=zr-xr;
 subplot(2,2,4)
-plot(t.Data,er.Data);
+plot(t.Data,er);
 grid on;
 legend({'er'});
 

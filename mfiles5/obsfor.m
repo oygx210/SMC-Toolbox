@@ -25,7 +25,7 @@ function [Ac,Dc,Cc,Tc]=obsfor(A,D,C,psm)
 % condition that C*D is full rank.
 %-----------------------------------------------------------------------------%
 msg=abcchk(A,D,C);
-if ~isempty(msg);
+if ~isempty(msg)
   error(msg);
 end
 
@@ -49,7 +49,7 @@ if nn-pp-r>0
     if nargin==3
         pmsg=['Enter '  num2str(nn-pp-r) ' desired stable sliding mode pole(s) '];
         msg=' ';
-        while ~isempty(msg);
+        while ~isempty(msg)
             p1=input(pmsg);
             p1=p1(:);
             msg=polechk(p1,nn-pp-r);
@@ -83,9 +83,10 @@ Lbar=[L zeros(nn-pp,qq)];
 % Build the final transformation needed to obtain the canonical form
 %---------------------------------------------------------------------------%
 T=Cf(:,nn-pp+1:nn);
-TL=[eye(nn-pp) Lbar ; zeros(pp,nn-pp) T];
+TL=[eye(nn-pp) Lbar; zeros(pp,nn-pp) T];
 Ac=TL*Af*inv(TL);                 % In this state-space representation 
 Dc=TL*Df;                         % C=[0 I]; D=[0 D2']' and the A matrix  
 Cc=Cf*inv(TL);                    % now has a stable top left sub-block 
 Tc=TL*Tout;
+end
 

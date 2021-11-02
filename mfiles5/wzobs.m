@@ -33,7 +33,7 @@ function [G,F]=wzobs(A,B,C,psm,per)
 %-----------------------------------------------------------------------------%
 
 msg=abcchk(A,B,C);
-if ~isempty(msg);
+if ~isempty(msg)
   error(msg);
 end
 
@@ -63,7 +63,7 @@ a22=Ac(nn-pp+1:nn,nn-pp+1:nn);
 if nargin==3
     pmsg=['Enter '  num2str(pp) ' output estimation error pole(s) '];
     msg=[' '];
-    while ~isempty(msg);
+    while ~isempty(msg)
         p=input(pmsg);
         p=p(:);
         msg=polechk(p,pp,1);
