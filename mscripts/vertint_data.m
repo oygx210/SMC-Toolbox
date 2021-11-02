@@ -2,7 +2,7 @@ clear all;
 
 load vertint.mat;
 
-%% Kap. 4.5.1
+%% Chap. 4.5.1 Model-Reference Design
 lambda = [-5.6 4.2 -1];
 nocomp=1;
 specent=[  0   0   1;
@@ -10,6 +10,13 @@ specent=[  0   0   1;
          NaN   1   0;
          NaN NaN NaN;
          NaN NaN NaN];
+
+% lambda = [-5.6 4.2 -1 -20 -20];
+% specent=[  0   0   1 NaN NaN;
+%            1 NaN   0 NaN NaN;
+%          NaN   1   0 NaN NaN;
+%          NaN NaN NaN   1 NaN;
+%          NaN NaN NaN NaN   1];
 
 [S,V]=dea(A,B,specent,lambda,nocomp);
 S=inv(S*B)*S;
@@ -27,7 +34,7 @@ Q=diag([10 5 5 20 20]);
 [S,E]=lqcf(A,B,Q);
 L=-inv(S*B)*(S*Am-Phi*S);
 
-%% Kap. 4.5.2
+%% Chap. 4.5.2 Integral Action Based Design
 [Aa,Ba]=intac(A,B,C);
 
 nocomp=1;
