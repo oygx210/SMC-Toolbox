@@ -27,7 +27,7 @@ function [L,P,Lam]=contl(A,B,S,Phi)
 %----------------------------------------------------------------------------%
 % Check the size of Phi and whether it is a stable design matrix 
 %----------------------------------------------------------------------------%
-if mx~=mm | my~=mm
+if mx~=mm || my~=mm
    error(' The size of the design matrix Phi is inconsistent');end
  
 if any(real(eig(Phi))>=-eps)
