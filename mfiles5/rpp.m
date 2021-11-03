@@ -59,7 +59,7 @@ cplxpair(p);
 % dynamic via robust eigenstructure assignment
 %----------------------------------------------------------------------------%
 rnk=rank(A12);
-if rnk==mm,
+if rnk==mm
    M=place(A11,A12,p); 
 else
   [Q,A12tilde]=qr(A12');

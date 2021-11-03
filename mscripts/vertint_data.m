@@ -34,6 +34,16 @@ Q=diag([10 5 5 20 20]);
 [S,E]=lqcf(A,B,Q);
 L=-inv(S*B)*(S*Am-Phi*S);
 
+%[Af,Bf,Cf,Tcan,r]=outfor(A,B,C);
+
+%
+rho=1;
+delta=0.001;
+[n,m]=size(B);
+[p,n]=size(C);
+
+x0=zeros(n);
+
 %% Chap. 4.5.2 Integral Action Based Design
 [Aa,Ba]=intac(A,B,C);
 
@@ -49,9 +59,7 @@ specent=[NaN NaN NaN NaN NaN;
   
 lambda = [-5.6 4.2 -1 -0.4 -0.7];
 
-
 [S,V]=dea(Aa,Ba,specent,lambda,nocomp);
-
 S=inv(S*Ba)*S;
 
 Phi=-20*eye(2);

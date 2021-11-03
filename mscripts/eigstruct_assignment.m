@@ -73,4 +73,4 @@ K=Ko*inv(Tc);
 % check roots of closed loop
 %[V,D] = eig(A-B*K);
 [V,D] = eigenshuffle(A-B*K);
-
+cond(V)
