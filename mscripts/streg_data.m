@@ -35,7 +35,7 @@ sp=roots([1 2*zeta*wn wn^2]); % second order for first 2 poles
 if n-m>2
     % to avoid multiple poles iterate through and increase each value
     for i=1:(n-m-2)
-        sp=[sp; -i];
+        sp=[sp; -i];  % [-1+i1; -1-i1; -1; -2; -3 ...]
     end
 end
 
@@ -56,7 +56,7 @@ cond(V)
 %% Simulate the model
 mdl_name='streg_mdl';
 if ~bdIsLoaded(mdl_name)
-    open('streg_mdl.slx');
+    open([mdl_name,'.slx']);
 end
 sim(mdl_name);
 
@@ -74,5 +74,3 @@ plot(t.Data,s.Data);
 legend({'s'});
 grid on;
 legend({'s'});
-
-%plot(y.Time,y.Data(:,3),yobs.Time,yobs.Data(:,3));
