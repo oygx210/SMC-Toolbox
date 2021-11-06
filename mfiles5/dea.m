@@ -117,7 +117,8 @@ for i=1:nocomp
 
    delta=n1\desent';
    if norm(delta) <=100*mm*eps
-      warndlg(' The specified entries produce a zero eigenvector');end
+      %warndlg(' The specified entries produce a zero eigenvector');
+   end
 
    vector=kgamma*delta;
    
@@ -148,7 +149,7 @@ for i=2*nocomp+1:(nn-mm)
   % Find solution for delta
    delta=n2\desent2';
    if norm(delta) < 100*mm*eps
-      warndlg(' The specified entries have produced a zero eigenvector');
+      %warndlg(' The specified entries have produced a zero eigenvector');
    end
    V(:,i)=nlambda*delta;
 
