@@ -2,18 +2,19 @@
 clear all;
 
 %% Load the system data
-% mat_name = 'aircraft';
-% mat_name = 'compped';
-% mat_name = 'dcmotor';
-% mat_name = 'furnobs';
-% mat_name = 'hecka';
-% mat_name = 'helcopt';
-% mat_name = 'huiex';
-% mat_name = 'invpen';
-% mat_name = 'l1011r';
-mat_name = 'vertint';
-load([mat_name,'.mat']);
+%load aircraft.mat;
+%load compped.mat;
+%load dcmotor.mat;
+load furnobs.mat;
+%load hecka.mat;
+%load helcopt.mat;
+%load huiex.mat;
+%load invpen.mat;
+%load l1011r.mat;
+%load oxymodel.mat;
+%load vertint.mat;
 
+%% Get system dimensions
 [n,m]=size(B);
 [p,n]=size(C);
 
@@ -54,22 +55,26 @@ M=inv(S*B)*S;
 cond(V)
 
 %% Simulate the model
-mdl_name='streg_mdl';
+mdl_name='stmod_mdl';
 if ~bdIsLoaded(mdl_name)
     open([mdl_name,'.slx']);
 end
 sim(mdl_name);
 
 %% Plot the results
-subplot(3,1,1)
+subplot(4,1,1)
 plot(t.Data,u.Data);
 grid on;
 legend({'u'});
-subplot(3,1,2)
+subplot(4,1,2)
 plot(t.Data,x.Data);
 grid on;
 legend({'x'});
-subplot(3,1,3)
+subplot(4,1,3)
+plot(t.Data,xm.Data);
+grid on;
+legend({'xm'});
+subplot(4,1,4)
 plot(t.Data,s.Data);
 legend({'s'});
 grid on;

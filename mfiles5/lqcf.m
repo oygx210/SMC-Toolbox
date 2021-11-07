@@ -55,11 +55,11 @@ end
 %----------------------------------------------------------------------------%
 % Check if Q is the right size and positive definite symmetric
 %----------------------------------------------------------------------------%
-if nn~=nnx | nn~=nny
+if nn~=nnx || nn~=nny
    error('The matrix Q is not consistent with the state dimension');end
 
 nnx = norm(Q,1);
-if any(eig(Q) <= eps*nnx) | (norm(Q'-Q,1)/nnx > eps)
+if any(eig(Q) <= eps*nnx) || (norm(Q'-Q,1)/nnx > eps)
    error('The matrix Q is not symmetric and positive definite');end
 
 %----------------------------------------------------------------------------%
