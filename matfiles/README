@@ -1,6 +1,6 @@
 FILE NAME        LAST UPDATE     DESCRIPTION
 
-aircraft.mat       20/8/98
+aircraft.mat       20/8/98       Aircraft model from 4.5 [1] (only A,B,C,D,F)
 compped.mat        20/8/98       Pedagogical compensator example from 5.6.2 [1]
 dcmotor.mat        20/8/98       DC motor example from 3.6.4 [1]
 furnobs.mat        20/8/98       Single-input furnace model from 7.4 [1]
@@ -10,7 +10,7 @@ invpen.mat         20/8/98       Inverted pendulum example from 5.6.3 [1]
 l1011r.mat         20/8/98       A model of the L-1011 aircraft from 5.7.1 [1]
 oxymodel.mat       20/8/98       A multivariable furnace model from 9.1 [1]
 rpv.mat            20/8/98       Remotely piloted vehicle model
-vertint.mat        20/8/98       Aircraft model from 4.5 [1]
+vertint.mat        20/8/98       Aircraft model from 4.5 [1] (full data)
 hecka.mat          20/1/00       Aircraft model from [2]
 
 [1] C.Edwards & S.K. Spurgeon, `Sliding Mode Control: Theory and Applications',

@@ -30,7 +30,7 @@ function [ret,x0,str,ts,xts]=stmod(t,x,u,flag)
 %       representation is used.
 
 % the system will take on the name of this mfile:
-sys = [mfilename,'_mdl'];
+sys = [mfilename,'_mdl_'];
 new_system(sys)
 % simver(1.3)
 if (0 == (nargin + nargout))

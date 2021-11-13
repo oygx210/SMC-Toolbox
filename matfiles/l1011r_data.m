@@ -24,25 +24,10 @@ C=data.C;
 % %[S,V]=dea(A,B,specent(:,1:n-m),lambda(1:n-m),nocomp);
 % [S,V]=dea(A,B,specent(:,1:n-m),lambda(1:n-m),nocomp);
 % S=inv(S*B)*S;
-
-%S=rpp(A,B,lambda(1:n-m));
-
-% Phi=diag([-5 -5]);
-
+% Phi=diag(lambda(n-m+1:end));
 % [Lx,P,Lam]=contl(A,B,S,Phi);
 
-% Design diagonal weighting matrix for the state vector
-% Q=diag([5 1 1 5 5]); % compare with Eq. 4.139
-
-% Designs a hyperplane S by minimising the linear quadratic cost function
-% [S,E]=lqcf(A,B,Q);
-% L=-inv(S*B)*(S*Am-Phi*S);
-
-%[Acal,Dcal,Ccal,Lbar,D2,TL,r]=canon(A,B,C,-5);
-
 Lx=data.Lx; % compare with Eq. 5.119
-
-%[Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C,-5,[-0.4470 -2.5061 -2.2372],[-5 -5]);
 
 % Model-Reference matrices
 Am=A+B*Lx;
@@ -52,14 +37,21 @@ Cm=data.Cm;
 
 Lr=-inv(Cm*inv(A+B*Lx)*B);
 
-Bm=B*Lr;
+%Bm=B*Lr;
 
 % Design diagonal weighting matrix for the state vector
 Q=diag([5 1 1 5 5]);
 
 % Designs a hyperplane S by minimising the linear quadratic cost function
 [S,E]=lqcf(A,B,Q);
-L=-inv(S*B)*(S*Am-Phi*S);
+%L=-inv(S*B)*(S*Am-Phi*S);
+
+% Design the dynamic compensator
+ped = -5; %  desired pole(s) for error dynamics (Lo)
+psm = E'; % reduced order sliding motion poles
+prsd = [-5 -5]; % desired pole(s) for range space dynamics
+
+[Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C,ped,psm,prsd);
 
 % Design parameter for switching function 
 rho=1;

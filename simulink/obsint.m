@@ -30,7 +30,7 @@ function [ret,x0,str,ts,xts]=obsint(t,x,u,flag)
 %       representation is used.
 
 % the system will take on the name of this mfile:
-sys = [mfilename,'_mdl'];
+sys = [mfilename,'_mdl_'];
 new_system(sys)
 % simver(1.3)
 if (0 == (nargin + nargout))
@@ -238,7 +238,7 @@ set_param([sys,'/','To Workspace1'],...
 %     Subsystem  'Observer'.
 
 % new_system([sys,'/','Observer'])
-add_block('built-in/SubSystem','obsint_mdl/Observer')
+add_block('built-in/SubSystem',[sys,'/','Observer'])
 set_param([sys,'/','Observer'],'Location',[363,193,920,525])
 
 add_block('simulink/Continuous/State-Space',[sys,'/',['Observer/Matrix',13,'Gain15']])

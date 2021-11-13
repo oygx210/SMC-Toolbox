@@ -1,3 +1,6 @@
+%% State feedback regulation simulation
+% Demonstration of using the function "contl"
+
 %% clear the workspace
 clear all;
 
@@ -5,7 +8,7 @@ clear all;
 % mat_name = 'aircraft';
 % mat_name = 'compped';
 % mat_name = 'dcmotor';
-% mat_name = 'furnobs';
+% mat_name = 'furnobs'; % Chap. 7.4: EXAMPLE: A Temperature Control Scheme
 % mat_name = 'hecka';
 % mat_name = 'helcopt';
 % mat_name = 'huiex';

@@ -26,10 +26,10 @@ Q=diag([10 1 1 0.1]);
 % Design the dynamic compensator
 ped = -10; %  desired pole(s) for error dynamics (Lo)
 %psm = [-4.3241+1i*1.7852,-4.3241-1i*1.7852,-3.1623]; % reduced order sliding motion poles
-psm = E; % reduced order sliding motion poles
+psm = E'; % reduced order sliding motion poles
 prsd = -6; % desired pole(s) for range space dynamics
 
-[Hhat,Dhat,S,L,P]=comrobs(A,B,C,ped,psm,prsd);
+[Hhat,Dhat,S,L,P,Lam,T]=comrobs(A,B,C,ped,psm,prsd);
 
 %% compare calculated valued with original
 fields = fieldnames(data);

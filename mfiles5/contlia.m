@@ -1,6 +1,6 @@
 function [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr_in)
 %
-% [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr)
+% [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr_in)
 %
 %         Returns the controller parameters in the case where integral action
 %         is used for tracking purposes. The matrix S represents the state

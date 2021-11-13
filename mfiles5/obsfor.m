@@ -41,7 +41,7 @@ end
 [Af,Df,Cf,Tout,r]=outfor(A,D,C);
 if isempty(Tout)
    fprintf('The observer canonical form is not attainable\n')
-   Ac=[];Dc=[];C=[];Tc=[];
+   Ac=[];Dc=[];Cc=[];Tc=[];
    return
 end
 
@@ -54,7 +54,7 @@ if nn-pp-r>0
             p1=p1(:);
             msg=polechk(p1,nn-pp-r);
         end
-    else if nargin==4
+    else if nargin==4  && ~isempty(psm)
             msg=polechk(psm,nn-pp-r);
             if ~isempty(msg)
                 error(msg);

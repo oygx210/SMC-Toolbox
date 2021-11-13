@@ -26,7 +26,7 @@ function msg=abcchk(A,B,C)
 [nn,mm]=size(B);
 
 msg=[];
-if isempty(A) | isempty(B)
+if isempty(A) || isempty(B)
    msg='A and B cannot be empty';
    return
 end
@@ -37,7 +37,7 @@ if  nx~=ny
   msg='A should be square';
   return
 end
-if (nx~=nn) | (nx<mm)
+if (nx~=nn) || (nx<mm)
   msg='The dimensions of A and B are not consistent';
   return
 end
@@ -47,7 +47,7 @@ end
 % check whether B is full rank
 rb=rank(B);
 
-if rb~=mm;
+if rb~=mm
    msg='The input distribution matrix is rank deficient';
    return
 end
@@ -55,7 +55,7 @@ end
   
 if nargin==3
    [pp,np]=size(C);       
-   if np~=nn | pp>nn
+   if np~=nn || pp>nn
       msg='The output distribution matrix is not consistent';
       return;
    end
@@ -71,7 +71,7 @@ if nargin==3
 else
   [Ac,Bc,Cc,Tc,k]=ctrbf(A,B,zeros(1,nn),1000*eps);
   u=nn-sum(k);
-  if u>0;
+  if u>0
      msg='The matrix pair (A,B) may not be controllable';
      if u>0
         Ac11=Ac(1:u,1:u);
