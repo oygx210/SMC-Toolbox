@@ -81,23 +81,42 @@ set_param(mdl_name,'StopTime',sprintf('%d',SimStopTime));
 sim(mdl_name);
 
 %% Plot the results
-subplot(4,1,1)
+subplot(2,4,1)
 plot(t.Data,u.Data);
 grid on;
-legend({'u'});
-subplot(4,1,2)
+legend(get_legend('u'));
+
+subplot(2,4,2)
+plot(t.Data,s.Data);
+grid on;
+legend(get_legend('s'));
+
+subplot(2,4,3)
+plot(t.Data,eo.Data);
+grid on;
+legend(get_legend('eo'));
+
+subplot(2,4,4)
+plot(t.Data,em.Data);
+grid on;
+legend(get_legend('em'));
+
+subplot(2,4,5)
 plot(t.Data,x.Data);
 grid on;
-legend({'x'});
-subplot(4,1,3)
+legend(get_legend('x'));
+
+subplot(2,4,7)
+plot(t.Data,z.Data);
+grid on;
+legend(get_legend('z'));
+
+subplot(2,4,8)
 plot(t.Data,xm.Data);
 grid on;
-legend({'xm'});
-subplot(4,1,4)
-plot(t.Data,s.Data);
-legend({'s'});
-grid on;
-legend({'s'});
+legend(get_legend('xm'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');
 
 
 %%
@@ -156,30 +175,3 @@ legend({'s'});
 % % check roots of closed loop
 % %[V,D] = eig(A-B*K);
 % [V,D] = eigenshuffle(A-B*K);
-
-
-
-
-
-% open('obsmod_mdl.slx');
-% 
-% sim('obsmod_mdl');
-% 
-% %%
-% subplot(3,1,1)
-% %plot(t.Data,u.Data);
-% plot(t.Data(1:1e4),p_obs_err.Data(1:1e4,:));
-% grid on;
-% legend({'error'});
-% subplot(3,1,2)
-% %plot(t.Data,x.Data(:,3),t.Data,xm.Data(:,3),t.Data,xobs.Data(:,3));
-% plot(t.Data(1:1e4),switch_fcn.Data(1:1e4,:));
-% grid on;
-% %legend({'x','xm','xobs'});
-% legend('switch_fcn');
-% subplot(3,1,3)
-% plot(t.Data,yobs.Data);
-% grid on;
-% legend({'wasched-out yaw rate','roll rate','sideship angle','bank angle'});
-% 
-% %plot(y.Time,y.Data(:,3),yobs.Time,yobs.Data(:,3));

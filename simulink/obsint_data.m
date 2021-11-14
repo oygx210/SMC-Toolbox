@@ -218,34 +218,39 @@ end
 set_param(mdl_name,'StopTime',sprintf('%d',SimStopTime));
 sim(mdl_name);
 
+%% plot simulation results
 
-% A=[0,1,0;
-%    0,0,1;
-%    -0.0001, -0.0082, -0.1029];
-% B=[0;0;1];
-% C=[0.0001,0.0022,0.0053];
-% 
-% Gamma=-0.025;
-% 
-% Phi=-0.1;
-% S=[-0.5372,0.0019,0.0822,1.000];
-% 
-% % design compensator with reduced observer
-% 
-% % with given Sr
-% % Sr=26.1642;
-% % [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi,Sr);
-% 
-% % without given Sr
-% [L,Lr,Lrdot,Sr,Lam,P]=contlia(A,B,C,S,Phi);
-% 
-% %%
-% open('obsint_mdl.slx');
-% sim('obsint_mdl');
-% 
-% plot(t.Data,er.Data);
-% grid on;
-% legend({'er'});
+subplot(2,3,1)
+plot(t.Data,u.Data);
+grid on;
+legend(get_legend('u'));
+
+subplot(2,3,2)
+plot(t.Data,s.Data);
+grid on;
+legend(get_legend('s'));
+
+subplot(2,3,3)
+plot(t.Data,r.Data);
+grid on;
+legend(get_legend('r'));
+
+subplot(2,3,4)
+plot(t.Data,y.Data);
+grid on;
+legend(get_legend('y'));
+
+subplot(2,3,5)
+plot(t.Data,ym.Data);
+grid on;
+legend(get_legend('ym'));
+
+subplot(2,3,6)
+plot(t.Data,ey.Data);
+grid on;
+legend(get_legend('ey'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');
 
 %%
 function sys_info(sys, mat_name)

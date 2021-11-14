@@ -102,7 +102,7 @@ switch mat_name
         rho=1;
         delta=0.001;
 
-        SimStopTime=10;
+        SimStopTime=5;
 end
 
 Lo=ped;
@@ -121,29 +121,32 @@ sim(mdl_name);
 
 %% plot simulation results
 subplot(2,2,1)
-%plot(t.Data,x.Data(:,3),t.Data,xm.Data(:,3),t.Data,xobs.Data(:,3));
 plot(t.Data,s.Data);
 grid on;
-legend('switch_fcn','Interpreter','none');
-subplot(2,2,3)
-plot(t.Data,x.Data);
-grid on;
-legend({'x1','x2','x3','x4'});
+legend(get_legend('s'));
 
 xc=xhat.Data(:,2);
 x11=x.Data(:,2);
 x12=x.Data(:,3);
 ec=xc-x11-Lo*x12;
-subplot(2,2,2)
-plot(t.Data,ec);
-grid on;
-legend({'ec'});
 
 xr=x.Data(:,1);
 zr=xhat.Data(:,1);
 er=zr-xr;
-subplot(2,2,4)
-plot(t.Data,er);
-grid on;
-legend({'er'});
 
+subplot(2,2,2)
+plot(t.Data,ec,t.Data,er);
+grid on;
+legend([get_legend('ec');get_legend('er')]);
+
+subplot(2,2,3)
+plot(t.Data,x.Data);
+grid on;
+legend(get_legend('x'));
+
+subplot(2,2,4)
+plot(t.Data,xhat.Data);
+grid on;
+legend(get_legend('xhat'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');

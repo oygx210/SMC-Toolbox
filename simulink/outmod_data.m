@@ -56,20 +56,19 @@ switch mat_name
 
         %P=0.25*eye(m);
 
-        x0=zeros(1,n);
-        x0(1)=1;
+        gammac=-1.5*eye(m);
 
-        xc0=zeros(1,n-p);
-        xc0(1)=0;
+        x0=zeros(1,n);
+        x0(1)=0.1;
 
         rho=1;
         delta=0.001;
 
-        SimStopTime=10;
+        SimStopTime=50;
 end
 
 %% Simulate the model
-mdl_name='outmodc_mdl';
+mdl_name='outmod_mdl';
 if ~bdIsLoaded(mdl_name)
     open([mdl_name,'.slx']);
 end
@@ -93,14 +92,14 @@ grid on;
 legend(get_legend('r'));
 
 subplot(2,3,4)
-plot(t.Data,x.Data);
+plot(t.Data,y.Data);
 grid on;
-legend(get_legend('x'));
+legend(get_legend('y'));
 
 subplot(2,3,5)
-plot(t.Data,xm.Data);
+plot(t.Data,ym.Data);
 grid on;
-legend(get_legend('xm'));
+legend(get_legend('ym'));
 
 subplot(2,3,6)
 plot(t.Data,ey.Data);

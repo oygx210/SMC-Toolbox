@@ -80,16 +80,19 @@ set_param(mdl_name,'StopTime',sprintf('%d',SimStopTime));
 sim(mdl_name);
 
 %% Plot the results
-subplot(3,1,1)
+subplot(2,2,1)
 plot(t.Data,u.Data);
 grid on;
-legend({'u'});
-subplot(3,1,2)
+legend(get_legend('u'))
+
+subplot(2,2,2)
+plot(t.Data,s.Data);
+grid on;
+legend(get_legend('s'));
+
+subplot(2,2,3)
 plot(t.Data,y.Data);
 grid on;
-legend({'y'});
-subplot(3,1,3)
-plot(t.Data,s.Data);
-legend({'s'});
-grid on;
-legend({'s'});
+legend(get_legend('y'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');
