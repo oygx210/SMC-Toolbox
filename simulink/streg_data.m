@@ -67,13 +67,16 @@ sim(mdl_name);
 subplot(3,1,1)
 plot(t.Data,u.Data);
 grid on;
-legend({'u'});
+legend(get_legend('u'));
+
 subplot(3,1,2)
 plot(t.Data,x.Data);
 grid on;
-legend({'x'});
+legend(get_legend('x'));
+
 subplot(3,1,3)
 plot(t.Data,s.Data);
-legend({'s'});
 grid on;
-legend({'s'});
+legend(get_legend('s'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');

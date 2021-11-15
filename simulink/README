@@ -1,11 +1,15 @@
-FILE NAME     LAST UPDATE      DESCRIPTION
+FILE NAME          LAST UPDATE      DESCRIPTION
 
-comp.m        20/8/98     Compensator simulation
-obsint.m      20/8/98     Observer simulation with integral action
-obsmod.m      20/8/98     Observer simulation using a model-reference approach
-outmod.m      20/8/98     Output feedback using a model-reference approach
-outmodc.m     20/8/98     Compensator simulation with a model-reference approach
-output.m      20/8/98     Output feedback simulation
-stint.m       20/8/98     State feedback simulation using integral action
-stmod.m       20/8/98     State feedback using a model-reference approach
-streg.m       20/8/98     State feedback regulation simulation
+comp.m             20/8/98     Compensator simulation
+obsint.m           20/8/98     Observer simulation with integral action
+obsmod.m           20/8/98     Observer simulation using a model-reference approach
+outmod.m           20/8/98     Output feedback using a model-reference approach
+outmodc.m          20/8/98     Compensator simulation with a model-reference approach
+output.m           20/8/98     Output feedback simulation
+stint.m            20/8/98     State feedback simulation using integral action
+stmod.m            20/8/98     State feedback using a model-reference approach
+streg.m            20/8/98     State feedback regulation simulation
+pendulum_mdl.slx   15/11/2021  Pendulum observer simulation from 6.4 [1]
+
+[1] C.Edwards & S.K. Spurgeon, `Sliding Mode Control: Theory and Applications',
+Taylor & Francis, 1998

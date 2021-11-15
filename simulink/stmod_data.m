@@ -45,7 +45,7 @@ switch mat_name
 
         Phi=-0.1;
         [L,P,Lam]=contl(A,B,S,Phi);
-        SimStopTime=300;
+        SimStopTime=500;
 
     case 'vertint'
         % design the swithcing surface
@@ -105,20 +105,34 @@ set_param(mdl_name,'StopTime',sprintf('%d',SimStopTime));
 sim(mdl_name);
 
 %% Plot the results
-subplot(4,1,1)
+subplot(2,3,1)
 plot(t.Data,u.Data);
 grid on;
-legend({'u'});
-subplot(4,1,2)
+legend(get_legend('u'));
+
+subplot(2,3,2)
+plot(t.Data,s.Data);
+grid on;
+legend(get_legend('s'));
+
+subplot(2,3,3)
+plot(t.Data,r.Data);
+grid on;
+legend(get_legend('r'));
+
+subplot(2,3,4)
 plot(t.Data,x.Data);
 grid on;
-legend({'x'});
-subplot(4,1,3)
+legend(get_legend('x'));
+
+subplot(2,3,5)
 plot(t.Data,xm.Data);
 grid on;
-legend({'xm'});
-subplot(4,1,4)
-plot(t.Data,s.Data);
-legend({'s'});
+legend(get_legend('xm'));
+
+subplot(2,3,6)
+plot(t.Data,em.Data);
 grid on;
-legend({'s'});
+legend(get_legend('em'));
+
+sgtitle([mdl_name,' - ',mat_name],'Interpreter','None');
